@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Innwa</title>
+	
+
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="css/all.css">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="css/mdb.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Material Design Bootstrap -->
+	
+	<!-- Our custom styles (optional) -->
+	<link rel="stylesheet" href="css/teamcs.css">
+	<link rel="icon" href="images/app_icon.png" type="image/gif" sizes="16x16">
+	<link rel="stylesheet" href="js/sweetalert2.css">
+	
+
+	<style>
+		.impcolor
+		{
+			color: red;
+			font-weight: bold;
+		}
+		.my_card{
+			margin-bottom: 20px;
+		}
+		.no_link{
+			text-decoration: none;
+		}
+		@font-face 
+		{
+		  font-family: 'Pyidaungsu';
+		  src: URL('font/Pyidaungsu.ttf') format('truetype');
+		  /*src: URL('font/Win.ttf') format('truetype');*/
+		}
+		body
+		{
+			font-family: Pyidaungsu;
+		}
+		.menudiv
+		{
+			width: 96%;
+			height: 50px;
+			margin-left: 2%;
+			background: rgb(2,110,116);
+			border-radius: 5px;
+		}
+		.menudiv1,.menudiv2
+		{
+			width: 40%;
+			height: 40px;
+			margin-top: 5px;
+			float: left;
+			margin-left: 7%;
+			border-radius: 7px;
+		}
+		.menudiv3
+		{
+			width: 33%;
+			height: 40px;
+			float: left;
+			border-radius: 7px;
+		}
+		.menudiv1
+		{
+			background-color:  #239b56  ;
+		}
+		.menudiv2
+		{
+			background-color:  #17a589 ;
+		}
+		a
+		{
+			color: white;
+			text-decoration: none;
+		}
+		.income
+		{
+			color: white;
+		}
+		.income:hover,.closeown:hover,.insert:hover
+		{
+			cursor: pointer;
+			color: blue;
+		}
+		.mymodal,#plusmodal,#incomemodal
+		{
+			width: 98%;
+			height: 100%;
+			z-index: 1000;
+			position: absolute;
+			left: 1%;
+			top: 80px;
+			display: none;
+		}
+		.mymodal
+		{
+			background-color:#f9e79f  ;
+		}
+		#plusmodal,#incomemodal
+		{
+			background-color: rgba(0,0,0,0.2);
+		}
+		.plusbtn,.minusbtn
+		{
+			width: 40px;
+			height: 40px;
+		}
+		#toappend
+		{
+			width: 100%;
+			height:auto;
+			overflow: auto;
+		}
+		.insert,.closeown
+		{
+			width: 40%;height: 100%;margin-left: 7%;float: left;color: white;border-radius: 6px;
+		}
+		.insert
+		{
+			background-color: green;
+		}
+		.closeown
+		{
+			background-color: red;
+		}
+	</style>
+</head>
+
+<body class="fixed-sn white-skin">
+
+	<!-- Main Navigation -->
+	<header>
+		
+		<!-- Navbar -->
+		<nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav" id="nav_id">
+			<!-- SideNav slide-out button -->
+			<div class="float-left"> <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars" style="display: none;"></i></a>
+			</div>
+			<!-- Breadcrumb -->
+			<div class="title_text mr-auto align-center text-center">
+				<h4 id="header_id">အင်းဝဘဏ်</h4>
+			</div>
+		</nav>
+		
+	</header>
+	<!-- Main Navigation -->
+
+	<!-- Main layout -->
+	<main>
+		<div class="container-fluid">
+			<!-- Section: Intro -->
+			<section id="intro_section">
+				<center>
+					<span>လစာထုတ်ရန် (<span class="impcolor" id="remaining_day"></span>)ရက်သာလိုတော့သည်!</span>
+					<br>
+					<span>လစာထုတ်ရက် (<span class="impcolor" id="remaining_date"></span>) နေ့</span>
+				</center>
+					<hr>
+					
+					<div class="menudiv">
+						<div class="menudiv1">
+							<!-- <center><a href="https://ablmm.com/online">လစာကြည့်ရန်</a></center> -->
+							<div style="margin-top: 5px;"><center><a href="https://ablmm.com/online">လစာကြည့်ရန်</a></center></div>
+						</div>
+						<div class="menudiv2">
+							<div style="margin-top: 5px;" class="income"><center><span>ဝင်ငွေထွက်ငွေ</span></center></div>
+						</div>
+					</div>
+					<!-- Grid row -->
+					<div class="row">
+						<div class="col-lg-4 col-md-6 my_card">
+							<div class="card testimonial-card ">
+								<a href="https://ablmm.com/online"><img src="iconss/innwa.gif" style="width: 100%;height:400px;"></img></a>
+							</div>
+						</div>
+					</div>
+					<!-- row -->
+				</div>
+
+
+				<!-- =========================== custom modal ========================= -->
+				<div class="mymodal">
+
+					<div style="width: 100%;height: 40px;background-color: white;">
+						<div class="menudiv3" style="background-color: white;">
+							<center><img src="iconss/plus.png" class="plusbtn"></center>
+						</div>
+						<div class="menudiv3" style="background-color: white;">
+							<center><img src="iconss/minus.jfif" class="minusbtn"></center>
+						</div>
+						<div class="menudiv3" style="background-color: white;">
+							<center><img src="iconss/report.png" class="minusbtn"></center>
+						</div>
+
+						<div id="toappend">
+							
+						</div>
+					</div><br>
+
+					<button type="button" class="close" id="modalclose" aria-label="Close">
+					  	<span aria-hidden="true">×</span>
+					</button>
+
+					
+				</div>
+				<!-- ========================== end custom modal ================================= -->
+				<!-- ================ add outcome =============================-->
+				<div id="plusmodal" style="">
+					<div style="width: 80%;height: 50%;margin-top: 20%;margin-left: 10%;background-color: white;">
+						<br>
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
+							<select class="browser-default custom-select">
+							  <option selected>အမျိုးအစားရွေးချယ်ပါ</option>
+							  <option value="အစားအစာ">အစားအစာ</option>
+							  <option value="အဝတ်အစား">အဝတ်အစား</option>
+							  <option value="ဖုန်းဘေ">ဖုန်းဘေ</option>
+							</select>
+						</div>
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
+							<input type="number" class="form-control" id="addamount" placeholder="ပမာဏ...">
+						</div>
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;background-color: ;">
+							<div class="saveoutcome insert" style="">
+								<center><div style="margin-top: 7px;"><span>သိမ်းမည်</span></div></center>
+							</div>
+							<div class="closeadd closeown" style="">
+								<center><div style="margin-top: 7px;"><span>ပိတ်မည်</span></div></center>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ================ add outcome =============================-->
+				<!-- ================ add income =============================-->
+				<div id="incomemodal" style="">
+					<div style="width: 80%;height: 50%;margin-top: 20%;margin-left: 10%;background-color: white;">
+						<br>
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
+							<input type="text" class="form-control" id="incometitle" placeholder="ခေါင်းစဉ်...">
+						</div>
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
+							<input type="number" class="form-control" id="incomeamount" placeholder="ပမာဏ...">
+						</div>
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;background-color: ;">
+							<div class="saveincome insert" style="">
+								<center><div style="margin-top: 7px;"><span>သိမ်းမည်</span></div></center>
+							</div>
+							<div class="closeincome closeown" style="">
+								<center><div style="margin-top: 7px;"><span>ပိတ်မည်</span></div></center>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ================ add income =============================-->
+			</section>
+			<!-- Section: Intro -->
+		</div>
+	</main>
+	<!-- Main layout -->
+
+	<!-- Footer -->
+	<footer class="page-footer pt-0 mt-5 rgba-stylish-light">
+		<!-- Copyright -->
+		<div class="footer-copyright py-3 text-center">
+			<div class="container-fluid">Developed By : <a href="#" target="_blank"> TEAM CS </a>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer -->
+
+
+	<!-- SCRIPTS -->
+	<!-- JQuery -->
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="js/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<!-- <script type="text/javascript" src="js/mdb.min.js"></script> -->
+
+	
+	<script src="js/modernizr.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/underscore.min.js"></script>
+	<script src="js/backbone.js"></script>
+	<script src="js/sweetalert2.js"></script>
+
+
+	<!-- Initializations -->
+	<script type="text/javascript">
+		var formValues="";
+		$(document).ready(function(){
+			function add()
+			{
+				(async () => {
+
+				const { value: formValues } = await Swal.fire({
+				  title: 'Multiple inputs',
+				  html:
+				    '<input id="swal-input1" class="swal2-input">' +
+				    '<input id="swal-input2" class="swal2-input">',
+				  focusConfirm: false,
+				  preConfirm: () => {
+				    return [
+				      document.getElementById('swal-input1').value,
+				      document.getElementById('swal-input2').value
+				    ]
+				  }
+				})
+
+				if (formValues) {
+				  Swal.fire(JSON.stringify(formValues))
+				}
+
+				})()
+			}
+			function convertEngToMyanmar(num)
+			{
+				num += "";
+				num = num.split(0).join("၀");
+				num = num.split(1).join("၁");
+				num = num.split(2).join("၂");
+				num = num.split(3).join("၃");
+				num = num.split(4).join("၄");
+				num = num.split(5).join("၅");
+				num = num.split(6).join("၆");
+				num = num.split(7).join("၇");
+				num = num.split(8).join("၈");
+				num = num.split(9).join("၉");
+				return num;
+			}
+
+			var month_arr = [31,28,31,30,31,30,31,31,30,31,30,31];	
+			var day_name = ["တနင်္ဂနွေ","တနင်္လာ","အင်္ဂါ","ဗုဒ္ဂဟူး","ကြာသပတေး","သောကြာ","စနေ"];	
+			var today=new Date();
+			console.log(today);
+			var date = today.getDate();
+			console.log(date);
+			var month = today.getMonth();
+			console.log(month);
+			var day = today.getDay();
+			console.log(day);
+
+			var full_month = month_arr[month] ;
+			var remaining_day = full_month - date ;
+			console.log("remaining_day is "+remaining_day);
+
+			var remaining_day_name = day + remaining_day ;
+			remaining_day_name = remaining_day_name % 7 ;
+			console.log("remaining_day_name is "+remaining_day_name);
+			if(remaining_day_name == 0 ) {
+				remaining_day -= 2 ;
+				remaining_day_name = 5 ;
+			}
+			else if(remaining_day_name == 6 ) {
+				remaining_day -= 1 ;
+				remaining_day_name = 5 ;
+			}
+			console.log("remaining_day is "+remaining_day);
+
+			var final_result = (remaining_day + date);
+			console.log("final_result is "+final_result);
+
+			$("#remaining_day").html(convertEngToMyanmar(remaining_day));
+			$("#remaining_date").html(convertEngToMyanmar(final_result)+ " " + day_name[remaining_day_name]);
+
+
+
+			// var custom_str = "2019-12-31";
+			// var mon = new Date("2019-12-31");
+			// console.log(mon);
+
+			$(document).on("click","#modalclose",function(){
+				$(".mymodal").hide();
+			});
+			$(document).on("click",".income",function(){
+				$(".mymodal").show();
+			});
+			$(document).on("click",".minusbtn",function(){
+				$("#plusmodal").show();
+			});
+			$(document).on("click",".closeadd",function(){
+				$("#plusmodal").hide();
+			});
+			$(document).on("click",".plusbtn",function(){
+				$("#incomemodal").show();
+			});
+			$(document).on("click",".closeincome",function(){
+				$("#incomemodal").hide();
+			});
+
+		});
+	</script>
+	<!-- Our JavaScript -->
+	
+</body>
+</html>
