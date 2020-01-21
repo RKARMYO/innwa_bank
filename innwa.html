@@ -348,6 +348,7 @@
 			console.log(month);
 			var day = today.getDay();
 			console.log(day);
+			var year=today.getYear();
 
 			var full_month = month_arr[month] ;
 			var remaining_day = full_month - date ;
@@ -396,6 +397,32 @@
 			$(document).on("click",".closeincome",function(){
 				$("#incomemodal").hide();
 			});
+			// ========================= save income ==============
+			console.log((month+1)+"  :  "+(year+1900));
+			var newmonth=month+1,newyear=year+1900;
+			$(document).on("click",".saveincome",function(){
+				var title=$("#incometitle").val();
+				var amount=$("#incomeamount").val();console.log("title :"+title+" ,amount :"+amount);
+				var arr=new Array();
+				arr=[{newmonth,newyear,title,amount}];//alert(arr[0].amount);
+				var org=JSON.parse(localStorage.getItem('localdata'));
+				var orgtotal=localStorage.getItem(''+toString(newmonth)+toString(newyear)+'');
+				if(org)
+				{
+					var newdata=org.concat(arr);
+					var totals=parseInt(orgtotal)+parseInt(arr[0].amount);//alert(arr.amount);
+					localStorage.setItem('localdata',JSON.stringify(newdata));
+					localStorage.setItem(''+toString(newmonth)+toString(newyear)+'',JSON.stringify(totals));console.log("OKOK");
+				}
+				else
+				{
+					localStorage.setItem('localdata',JSON.stringify(arr));
+					localStorage.setItem(''+toString(newmonth)+toString(newyear)+'',arr[0].amount);console.log("OK");
+				}
+				$("#incomemodal").hide();
+			});
+			console.log(JSON.parse(localStorage.localdata));
+			console.log(localStorage.getItem(''+toString(newmonth)+toString(newyear)+''));
 
 		});
 	</script>
