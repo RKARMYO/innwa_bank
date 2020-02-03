@@ -97,7 +97,7 @@
 			z-index: 1000;
 			position: absolute;
 			left: 1%;
-			top: 80px;
+			top: 65px;
 			display: none;
 		}
 		.mymodal
@@ -108,10 +108,23 @@
 		{
 			background-color: rgba(0,0,0,0.2);
 		}
-		.plusbtn,.minusbtn
+		.plusbtn
 		{
-			width: 40px;
-			height: 40px;
+			width: 60px;
+			height: 60px;
+			color: green;
+		}
+		.minusbtn
+		{
+			width: 60px;
+			height: 60px;
+			color: red;
+		}
+		.report
+		{
+			width: 60px;
+			height: 60px;
+			color: blue;
 		}
 		#toappend
 		{
@@ -130,6 +143,10 @@
 		.closeown
 		{
 			background-color: red;
+		}
+		#mychart
+		{
+			display: none;
 		}
 	</style>
 </head>
@@ -184,40 +201,55 @@
 					</div>
 					<!-- row -->
 				</div>
-
+				
 
 				<!-- =========================== custom modal ========================= -->
 				<div class="mymodal">
 
-					<div style="width: 100%;height: 40px;background-color: white;">
-						<div class="menudiv3" style="background-color: white;">
-							<center><img src="iconss/plus.png" class="plusbtn"></center>
+
+					<div style="width: 100%;height: 40px;margin-top: 0px;">
+						
+					<button type="button" class="close" id="modalclose" aria-label="Close">
+						<span aria-hidden="true">×</span>
+				  </button>
+						<div class="menudiv3" style="margin-top: 23px;">
+							<center><i class="fas fa-plus-circle plusbtn"></i></center>
 						</div>
-						<div class="menudiv3" style="background-color: white;">
-							<center><img src="iconss/minus.jfif" class="minusbtn"></center>
+						<div class="menudiv3" style="margin-top: 23px;">
+							<center><i class="fas fa-minus-circle minusbtn"></i></center>
 						</div>
-						<div class="menudiv3" style="background-color: white;">
-							<center><img src="iconss/report.png" class="minusbtn"></center>
+						<div class="menudiv3">
+							<center><i class="fas fa-chart-line report"></i></center>
+						</div>
+						
+						<div id="toappend">
+							<!-- <div style="width: 100%;height: 45px;">
+								<center>
+								<table class="mytable" cellspacing='0' width='100%' style="background-color: rgba(0,0,0,0.2);">
+									<tr><td>ရက်စွဲ</td><td>ခေါင်းစဉ်</td><td>ပမာဏ</td><td>ဝင်ငွေစုစုပေါင်း</td></tr>
+									<tr><td>1.1.2020</td><td>Test</td><td>6000</td><td>10000</td></tr>
+								</table>
+								</center>
+							</div> -->
 						</div>
 
-						<div id="toappend">
-							
+						<!-- ========== Chart =============-->
+						<div id="mychart">
+							<canvas id="pieChart"></canvas>
 						</div>
+						<!-- ========== End Chart =============-->
+						
 					</div><br>
 
-					<button type="button" class="close" id="modalclose" aria-label="Close">
-					  	<span aria-hidden="true">×</span>
-					</button>
-
-					
 				</div>
 				<!-- ========================== end custom modal ================================= -->
 				<!-- ================ add outcome =============================-->
 				<div id="plusmodal" style="">
-					<div style="width: 80%;height: 50%;margin-top: 20%;margin-left: 10%;background-color: white;">
+					<div style="width: 80%;height: 250px;margin-top: 20%;margin-left: 10%;background-color: white;">
 						<br>
+						<center><span style="color: blue;">ထွက်ငွေ</span></center>
 						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
-							<select class="browser-default custom-select">
+							<select class="browser-default custom-select outcometype">
 							  <option selected>အမျိုးအစားရွေးချယ်ပါ</option>
 							  <option value="အစားအစာ">အစားအစာ</option>
 							  <option value="အဝတ်အစား">အဝတ်အစား</option>
@@ -225,11 +257,11 @@
 							</select>
 						</div>
 						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
-							<input type="number" class="form-control" id="addamount" placeholder="ပမာဏ...">
+							<input type="number" class="form-control" id="outcomeamount" placeholder="ပမာဏ...">
 						</div>
-						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;background-color: ;">
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
 							<div class="saveoutcome insert" style="">
-								<center><div style="margin-top: 7px;"><span>သိမ်းမည်</span></div></center>
+								<center><div style="margin-top: 7px;" class="insertoutcome"><span>သိမ်းမည်</span></div></center>
 							</div>
 							<div class="closeadd closeown" style="">
 								<center><div style="margin-top: 7px;"><span>ပိတ်မည်</span></div></center>
@@ -240,15 +272,16 @@
 				<!-- ================ add outcome =============================-->
 				<!-- ================ add income =============================-->
 				<div id="incomemodal" style="">
-					<div style="width: 80%;height: 50%;margin-top: 20%;margin-left: 10%;background-color: white;">
+					<div style="width: 80%;height: 250px;margin-top: 20%;margin-left: 10%;background-color: white;">
 						<br>
+						<center><span style="color: blue;">ဝင်ငွေ</span></center>
 						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
 							<input type="text" class="form-control" id="incometitle" placeholder="ခေါင်းစဉ်...">
 						</div>
 						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
 							<input type="number" class="form-control" id="incomeamount" placeholder="ပမာဏ...">
 						</div>
-						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;background-color: ;">
+						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
 							<div class="saveincome insert" style="">
 								<center><div style="margin-top: 7px;"><span>သိမ်းမည်</span></div></center>
 							</div>
@@ -292,37 +325,14 @@
 	<script src="js/underscore.min.js"></script>
 	<script src="js/backbone.js"></script>
 	<script src="js/sweetalert2.js"></script>
+	<script src="js/chart.js"></script>
 
 
 	<!-- Initializations -->
 	<script type="text/javascript">
-		var formValues="";
-		$(document).ready(function(){
-			function add()
-			{
-				(async () => {
+		
 
-				const { value: formValues } = await Swal.fire({
-				  title: 'Multiple inputs',
-				  html:
-				    '<input id="swal-input1" class="swal2-input">' +
-				    '<input id="swal-input2" class="swal2-input">',
-				  focusConfirm: false,
-				  preConfirm: () => {
-				    return [
-				      document.getElementById('swal-input1').value,
-				      document.getElementById('swal-input2').value
-				    ]
-				  }
-				})
-
-				if (formValues) {
-				  Swal.fire(JSON.stringify(formValues))
-				}
-
-				})()
-			}
-			function convertEngToMyanmar(num)
+		function convertEngToMyanmar(num)
 			{
 				num += "";
 				num = num.split(0).join("၀");
@@ -337,6 +347,29 @@
 				num = num.split(9).join("၉");
 				return num;
 			}
+		// =========== get from local storage =============
+		function getdata()
+		{
+			var data=JSON.parse(localStorage.localdata);//alert(data[1].title);
+			$("#toappend").empty();
+			for(i=0;i<data.length;i++)
+			{
+				$("#toappend").prepend('<div style="width: 100%;height: 45px;margin-top:7px;"><center><table class="mytable" cellspacing="0" width="100%" style="background-color: rgba(0,0,0,0.2);"><tr><td>ရက်စွဲ</td><td>ခေါင်းစဉ်</td><td>ပမာဏ</td><td>ဝင်ငွေစုစုပေါင်း</td></tr><tr><td>'+convertEngToMyanmar(data[i].date+'/'+data[i].newmonth+'/'+data[i].newyear)+'</td><td>'+data[i].title+'</td><td>'+convertEngToMyanmar(data[i].amount)+' ကျပ်</td><td>'+convertEngToMyanmar(data[i].totals)+' ကျပ်</td></tr></table></center></div>');
+			}
+		}
+
+		function outcome()
+		{
+			var data=JSON.parse(localStorage.outcome);//alert(data[1].title);
+			$("#toappend").empty();
+			for(i=0;i<data.length;i++)
+			{
+				$("#toappend").prepend('<div style="width: 100%;height: 45px;margin-top:7px;"><center><table class="mytable" cellspacing="0" width="100%" style="background-color: rgba(0,0,0,0.2);"><tr><td>ရက်စွဲ</td><td>ခေါင်းစဉ်</td><td>သုံးငွေ</td><td>လက်ကျန်ငွေ</td></tr><tr><td>'+convertEngToMyanmar(data[i].date+'/'+data[i].newmonth+'/'+data[i].newyear)+'</td><td>'+data[i].outcometype+'</td><td>'+convertEngToMyanmar(data[i].outcomeamount)+' ကျပ်</td><td>'+convertEngToMyanmar(data[i].remain)+' ကျပ်</td></tr></table></center></div>');
+			}
+		}
+		$(document).ready(function(){
+			getdata();
+			//outcome();
 
 			var month_arr = [31,28,31,30,31,30,31,31,30,31,30,31];	
 			var day_name = ["တနင်္ဂနွေ","တနင်္လာ","အင်္ဂါ","ဗုဒ္ဂဟူး","ကြာသပတေး","သောကြာ","စနေ"];	
@@ -387,12 +420,18 @@
 			});
 			$(document).on("click",".minusbtn",function(){
 				$("#plusmodal").show();
+				outcome();
+				$("#mychart").hide();
+				$("#toappend").show();
 			});
 			$(document).on("click",".closeadd",function(){
 				$("#plusmodal").hide();
 			});
 			$(document).on("click",".plusbtn",function(){
 				$("#incomemodal").show();
+				getdata();
+				$("#mychart").hide();
+				$("#toappend").show();
 			});
 			$(document).on("click",".closeincome",function(){
 				$("#incomemodal").hide();
@@ -404,13 +443,16 @@
 				var title=$("#incometitle").val();
 				var amount=$("#incomeamount").val();console.log("title :"+title+" ,amount :"+amount);
 				var arr=new Array();
-				arr=[{newmonth,newyear,title,amount}];//alert(arr[0].amount);
+				var totals=amount;
+				arr=[{date,newmonth,newyear,title,amount,totals}];//alert(arr[0].amount);
 				var org=JSON.parse(localStorage.getItem('localdata'));
 				var orgtotal=localStorage.getItem(''+toString(newmonth)+toString(newyear)+'');
 				if(org)
 				{
-					var newdata=org.concat(arr);
 					var totals=parseInt(orgtotal)+parseInt(arr[0].amount);//alert(arr.amount);
+					arrs=[{date,newmonth,newyear,title,amount,totals}];
+					var newdata=org.concat(arrs);
+					
 					localStorage.setItem('localdata',JSON.stringify(newdata));
 					localStorage.setItem(''+toString(newmonth)+toString(newyear)+'',JSON.stringify(totals));console.log("OKOK");
 				}
@@ -424,6 +466,89 @@
 			console.log(JSON.parse(localStorage.localdata));
 			console.log(localStorage.getItem(''+toString(newmonth)+toString(newyear)+''));
 
+			// ================================ save outcome ================================
+			$(document).on("click",".insertoutcome",function(){
+				var outcometype=$(".outcometype").val();
+				var outcomeamount=$("#outcomeamount").val();console.log(outcometype+outcomeamount);
+
+				var org=JSON.parse(localStorage.getItem('outcome'));
+				var totals=localStorage.getItem(''+toString(newmonth)+toString(newyear)+'');
+				if(org)
+				{
+					var totalamount=0;
+					for(i=0;i<org.length;i++)
+					{
+						totalamount+=parseInt(org[i].outcomeamount);
+					}
+					totalamount+=parseInt(outcomeamount);
+					var remain=totals-totalamount;alert(totals+'-'+totalamount);alert(remain); 
+					var arr=new Array();
+					arrs=[{date,newmonth,newyear,outcometype,outcomeamount,remain}];
+					var newdata=org.concat(arrs);
+					localStorage.setItem('outcome',JSON.stringify(newdata));
+				}
+				else
+				{
+					var arr=new Array();
+					var remain=totals-outcomeamount;//alert(remain);
+					arr=[{date,newmonth,newyear,outcometype,outcomeamount,remain}];
+					localStorage.setItem('outcome',JSON.stringify(arr));
+				}
+			});
+
+			// ======================= chart ================
+			var orgs=JSON.parse(localStorage.getItem('outcome'));
+			if(orgs)
+			{
+				var food=0,phone=0;cloth=0;
+				for(i=0;i<orgs.length;i++)
+				{
+					if(orgs[i].outcometype=='အစားအစာ') food+= parseInt(orgs[i].outcomeamount);
+					else if(orgs[i].outcometype=='အဝတ်အစား') cloth+= parseInt(orgs[i].outcomeamount);
+					else if(orgs[i].outcometype=='ဖုန်းဘေ') phone+= parseInt(orgs[i].outcomeamount);
+				}
+
+				//pie
+				var ctxP = document.getElementById("pieChart").getContext('2d');
+				var myPieChart = new Chart(ctxP, {
+					type: 'pie',
+					data: {
+					labels: ["အစားအစာ", "ဖုန်းဘေ", "အဝတ်အစား", "Grey", "Dark Grey"],
+					datasets: [{
+					data: [food, phone, cloth, 0, 0],
+					backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+					hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+					}]
+					},
+					options: {
+					responsive: true
+					}
+				});
+			}
+			else
+			{
+				//pie
+				var ctxP = document.getElementById("pieChart").getContext('2d');
+				var myPieChart = new Chart(ctxP, {
+					type: 'pie',
+					data: {
+					labels: ["အစားအစာ", "ဖုန်းဘေ", "အဝတ်အစား", "Grey", "Dark Grey"],
+					datasets: [{
+					data: [0, 0, 0, 0, 0],
+					backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+					hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+					}]
+					},
+					options: {
+					responsive: true
+					}
+				});
+			}
+			$(document).on("click",".report",function(){
+				$("#mychart").show();
+				$("#toappend").hide();
+			});
+	
 		});
 	</script>
 	<!-- Our JavaScript -->
