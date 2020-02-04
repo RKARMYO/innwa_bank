@@ -64,7 +64,7 @@
 		.menudiv3
 		{
 			width: 33%;
-			height: 40px;
+			height: 60px;
 			float: left;
 			border-radius: 7px;
 		}
@@ -136,17 +136,33 @@
 		{
 			width: 40%;height: 100%;margin-left: 7%;float: left;color: white;border-radius: 6px;
 		}
-		.insert
+		/* .insert
 		{
 			background-color: green;
-		}
-		.closeown
+		} */
+		/* .closeown
 		{
 			background-color: red;
-		}
+		} */
 		#mychart
 		{
 			display: none;
+		}
+		.closeadd,.closeincome
+		{
+			color: white;
+		}
+		table
+		{
+			text-align: left;
+		}
+		th
+		{
+			color:teal;
+		}
+		td
+		{
+			color:blue;
 		}
 	</style>
 </head>
@@ -207,11 +223,11 @@
 				<div class="mymodal">
 
 
-					<div style="width: 100%;height: 40px;margin-top: 0px;">
+					<div style="width: 100%;height: 60px;margin-top: 0px;">
 						
-					<button type="button" class="close" id="modalclose" aria-label="Close">
-						<span aria-hidden="true" style="color: red;font-weight: bold;">×</span>
-				  </button>
+						<button type="button" class="close" id="modalclose" aria-label="Close">
+							<span aria-hidden="true" style="color: red;font-weight: bold;">×</span>
+						</button>
 						<div class="menudiv3" style="margin-top: 23px;">
 							<center><i class="fas fa-plus-circle plusbtn"></i></center>
 						</div>
@@ -232,14 +248,14 @@
 								</center>
 							</div> -->
 						</div>
-
-						<!-- ========== Chart =============-->
-						<div id="mychart" style="padding-top:125px;">
-							<canvas id="pieChart"></canvas>
-						</div>
-						<!-- ========== End Chart =============-->
-						
 					</div><br>
+					<!-- ========== Chart =============-->
+					<div id="mychart" style="padding-top:125px;">
+						<canvas id="pieChart"></canvas>
+					</div>
+					<!-- ========== End Chart =============-->
+						
+					
 
 				</div>
 				<!-- ========================== end custom modal ================================= -->
@@ -256,6 +272,7 @@
 							  <option value="ဖုန်းဘေ">ဖုန်းဘေ</option>
 							  <option value="အလှူ">အလှူ</option>
 							  <option value="မိဘကန်တော့">မိဘကန်တော့</option>
+							  <option value="အကြွေး">အကြွေး</option>
 							  <option value="အထွေထွေ">အထွေထွေ</option>
 							</select>
 						</div>
@@ -264,10 +281,12 @@
 						</div>
 						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
 							<div class="saveoutcome insert">
-								<center><div style="margin-top: 7px;" class="insertoutcome"><span>သိမ်းမည်</span></div></center>
+								<!-- <center><div style="margin-top: 7px;" class="insertoutcome"><span>သိမ်းမည်</span></div></center> -->
+								<button type="button" class="btn btn-rounded btn-primary insertoutcome"><i class="fas fa-save pr-2" aria-hidden="true"></i>သိမ်းမည်</button>
 							</div>
-							<div class="closeadd closeown">
-								<center><div style="margin-top: 7px;"><span>ပိတ်မည်</span></div></center>
+							<div class="closeadda closeowna">
+								<!-- <center><div style="margin-top: 7px;"><span>ပိတ်မည်</span></div></center> -->
+								<button type="button" class="btn btn-rounded btn-amber closeadd"><i class="fas fa-times pr-2" aria-hidden="true"></i>ပိတ်မည်</button>
 							</div>
 						</div>
 					</div>
@@ -285,11 +304,13 @@
 							<input type="number" class="form-control" id="incomeamount" placeholder="ပမာဏ...">
 						</div>
 						<div style="width:90%;height:40px;margin-left:5%;margin-top: 20px;">
-							<div class="saveincome insert">
-								<center><div style="margin-top: 7px;"><span>သိမ်းမည်</span></div></center>
+							<div class="saveincomea insert">
+								<!-- <center><div style="margin-top: 7px;"><span>သိမ်းမည်</span></div></center> -->
+								<button type="button" class="btn btn-rounded btn-primary saveincome"><i class="fas fa-save pr-2" aria-hidden="true"></i>သိမ်းမည်</button>
 							</div>
-							<div class="closeincome closeown">
-								<center><div style="margin-top: 7px;"><span>ပိတ်မည်</span></div></center>
+							<div class="closeincome closeowna">
+								<!-- <center><div style="margin-top: 7px;"><span>ပိတ်မည်</span></div></center> -->
+								<button type="button" class="btn btn-rounded btn-amber closeincome"><i class="fas fa-times pr-2" aria-hidden="true"></i>ပိတ်မည်</button>
 							</div>
 						</div>
 					</div>
@@ -360,10 +381,13 @@
 			if(rkm)
 			{
 				var data=JSON.parse(rkm);
+				//$("#toappend").append('</table></center></div>');
 				for(i=0;i<data.length;i++)
 				{
-					$("#toappend").prepend('<div style="width: 100%;height: 45px;margin-top:7px;"><center><table class="mytable" cellspacing="0" width="100%" style="background-color: rgba(0,0,0,0.2);"><tr><td>ရက်စွဲ</td><td>ခေါင်းစဉ်</td><td>ပမာဏ</td><td>ဝင်ငွေစုစုပေါင်း</td></tr><tr><td>'+convertEngToMyanmar(data[i].date+'/'+data[i].newmonth+'/'+data[i].newyear)+'</td><td>'+data[i].title+'</td><td>'+convertEngToMyanmar(data[i].amount)+' ကျပ်</td><td>'+convertEngToMyanmar(data[i].totals)+' ကျပ်</td></tr></table></center></div>');
+					$("#toappend").prepend('<div style="width: 100%;height: 45px;margin-top:7px;"><center><table class="mytable" cellspacing="0" width="100%" style="background-color: rgba(0,0,0,0.2);"><tr><th>ရက်စွဲ</th><th>ခေါင်းစဉ်</th><th>ပမာဏ</th><th>ဝင်ငွေစုစုပေါင်း</th></tr><tr><td>'+convertEngToMyanmar(data[i].date+'/'+data[i].newmonth+'/'+data[i].newyear)+'</td><td>'+data[i].title+'</td><td>'+convertEngToMyanmar(data[i].amount)+' ကျပ်</td><td>'+convertEngToMyanmar(data[i].totals)+' ကျပ်</td></tr></table></center></div>');
+					//$("#toappend").prepend('<tr><td>'+convertEngToMyanmar(data[i].date+'/'+data[i].newmonth+'/'+data[i].newyear)+'</td><td>'+data[i].title+'</td><td>'+convertEngToMyanmar(data[i].amount)+' ကျပ်</td><td>'+convertEngToMyanmar(data[i].totals)+' ကျပ်</td></tr>');
 				}
+				//$("#toappend").prepend('<div style="width: 100%;height: 45px;margin-top:7px;"><center><table class="mytable" cellspacing="0" width="100%" style="background-color: rgba(0,0,0,0.2);"><tr><td>ရက်စွဲ</td><td>ခေါင်းစဉ်</td><td>ပမာဏ</td><td>ဝင်ငွေစုစုပေါင်း</td></tr>');
 			}
 			else
 			{
@@ -380,7 +404,7 @@
 				$("#toappend").empty();
 				for(i=0;i<data.length;i++)
 				{
-					$("#toappend").prepend('<div style="width: 100%;height: 45px;margin-top:7px;"><center><table class="mytable" cellspacing="0" width="100%" style="background-color: rgba(0,0,0,0.2);"><tr><td>ရက်စွဲ</td><td>ခေါင်းစဉ်</td><td>သုံးငွေ</td><td>လက်ကျန်ငွေ</td></tr><tr><td>'+convertEngToMyanmar(data[i].date+'/'+data[i].newmonth+'/'+data[i].newyear)+'</td><td>'+data[i].outcometype+'</td><td>'+convertEngToMyanmar(data[i].outcomeamount)+' ကျပ်</td><td>'+convertEngToMyanmar(data[i].remain)+' ကျပ်</td></tr></table></center></div>');
+					$("#toappend").prepend('<div style="width: 100%;height: 45px;margin-top:7px;"><center><table class="mytable" cellspacing="0" width="100%" style="background-color: rgba(0,0,0,0.2);"><tr><th>ရက်စွဲ</th><th>ခေါင်းစဉ်</th><th>သုံးငွေ</th><th>လက်ကျန်ငွေ</th></tr><tr><td>'+convertEngToMyanmar(data[i].date+'/'+data[i].newmonth+'/'+data[i].newyear)+'</td><td>'+data[i].outcometype+'</td><td>'+convertEngToMyanmar(data[i].outcomeamount)+' ကျပ်</td><td>'+convertEngToMyanmar(data[i].remain)+' ကျပ်</td></tr></table></center></div>');
 				}
 			}
 		}
@@ -526,7 +550,7 @@
 				var orgs=JSON.parse(localStorage.getItem('outcome'));
 				if(orgs)
 				{
-					var food=0,phone=0;cloth=0,offer=0,other=0,parents=0;
+					var food=0,phone=0;cloth=0,offer=0,other=0,parents=0,borrow=0;
 					for(i=0;i<orgs.length;i++)
 					{
 						if(orgs[i].outcometype=='အစားအစာ') food+= parseInt(orgs[i].outcomeamount);
@@ -535,6 +559,7 @@
 						else if(orgs[i].outcometype=='အလှူ') offer+= parseInt(orgs[i].outcomeamount);
 						else if(orgs[i].outcometype=='အထွေထွေ') other+= parseInt(orgs[i].outcomeamount);
 						else if(orgs[i].outcometype=='မိဘကန်တော့') parents+= parseInt(orgs[i].outcomeamount);
+						else if(orgs[i].outcometype=='အကြွေး') borrow+= parseInt(orgs[i].outcomeamount);
 					}
 
 					//pie
@@ -542,11 +567,11 @@
 					var myPieChart = new Chart(ctxP, {
 						type: 'pie',
 						data: {
-						labels: ["အစားအသောက်", "ဖုန်းဘေ", "အဝတ်အစား", "အလှူ", "အထွေထွေ","မိဘကန်တော့"],
+						labels: ["အစားအသောက်", "ဖုန်းဘေ", "အဝတ်အစား", "အလှူ", "အထွေထွေ","မိဘကန်တော့","အကြွေး"],
 						datasets: [{
-						data: [food, phone, cloth, offer, other,parents],
-						backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360","#047CBA"],
-						hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774","#047CBA"]
+						data: [food, phone, cloth, offer, other,parents,borrow],
+						backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360","#047CBA","green"],
+						hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774","#047CBA","green"]
 						}]
 						},
 						options: {
